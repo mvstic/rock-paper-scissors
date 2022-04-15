@@ -6,11 +6,14 @@ const resetButton = document.getElementById("reset");
 const playerScore = document.getElementById("player-score");
 const computerScore = document.getElementById("computer-score");
 const gameWinner = document.getElementById("game-winner");
+const gameStatus = document.getElementById("game-status");
 
 
 const choices = ["rock", "paper", "scissors"];
 let playerPoints = 0
 let computerPoints = 0
+
+playAgainButton.setAttribute("disabled", 1);
 
 function computerPlay() {
     return choices[Math.floor(Math.random() * choices.length)];
@@ -57,6 +60,7 @@ function gameClick(e) {
     const playerSelection = e.target.id;
     const computerSelection = computerPlay();
     playRound (playerSelection, computerSelection);
+    gameStatus.textContent = `Computer played: ${computerSelection}. You played: ${playerSelection}.`;
     console.log(`(Computer played: ${computerSelection}. You played: ${playerSelection}.)`)
     console.log(`${playerPoints}:${computerPoints}`); 
     updateScore();
@@ -94,4 +98,5 @@ function playAgain() {
     paperButton.removeAttribute("disabled");
     scissorsButton.removeAttribute("disabled");
     gameWinner.textContent = ``;
+    playAgainButton.setAttribute("disabled", 1);
 }
